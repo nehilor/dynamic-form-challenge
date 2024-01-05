@@ -1,7 +1,9 @@
 import React from 'react';
-import { TextField, Select, MenuItem, InputLabel, FormControl, TextareaAutosize, Typography } from '@mui/material';
+import { TextField, Select, MenuItem, FormControl, TextareaAutosize, Typography } from '@mui/material';
 
-const FormField = ({ field, value, onFieldChange }: { field: any, value: any, onFieldChange: any }) => {
+const FormField = ({ field, value, onFieldChange, showError }: { field: any, value: any, onFieldChange: any, showError: boolean }) => {
+    
+    const isRequired = field.required && !value;
 
     const fieldStyle = {
         marginBottom: '0.750rem',
@@ -40,6 +42,7 @@ const FormField = ({ field, value, onFieldChange }: { field: any, value: any, on
                             onChange={(e) => onFieldChange(e.target.value)}
                             placeholder={buildPlaceholder()}
                             type={field.type}
+                            error={showError && isRequired}
                         />
                      </FormControl>
                 );
