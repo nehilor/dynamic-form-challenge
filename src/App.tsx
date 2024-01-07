@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Form from './features/form/Form';
 import { styled } from '@mui/system';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from './app/store';
+import ThankYouPage from './features/thankyou/ThankYouPage';
 
 const StyledBox = styled('div')({
   minHeight: '100vh',
@@ -20,7 +23,11 @@ const StyledContainer = styled(Container)({
   borderRadius: '4px',
 });
 
+
 function App() {
+
+  const { formSent } = useSelector((state: RootState) => state.form);
+
   return (
     <StyledBox>
       <CssBaseline />
@@ -32,7 +39,7 @@ function App() {
             </Typography>
           </Grid>
           <Grid item>
-            <Form />
+          {formSent ? <ThankYouPage /> : <Form />}
           </Grid>
         </Grid>
       </StyledContainer>

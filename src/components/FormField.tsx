@@ -6,7 +6,6 @@ const FormField = ({ field, value, onFieldChange, showError }: { field: any, val
     const isRequired = field.required && !value;
 
     const fieldStyle = {
-        marginBottom: '0.750rem',
         marginTop: '0.750rem',
     };
 
@@ -32,44 +31,40 @@ const FormField = ({ field, value, onFieldChange, showError }: { field: any, val
         switch (field.type) {
             case 'text':
                 return (
-                    <FormControl fullWidth variant="outlined" required={field.required} style={fieldStyle}>
-                        <TextField
-                            fullWidth
-                            label={buildPlaceholder()}
-                            variant="outlined"
-                            required={field.required}
-                            value={value || ''}
-                            onChange={(e) => onFieldChange(e.target.value)}
-                            placeholder={buildPlaceholder()}
-                            type={field.type}
-                            error={showError && isRequired}
-                        />
-                     </FormControl>
+                    <TextField
+                        id={field.id}
+                        fullWidth
+                        label={buildPlaceholder()}
+                        variant="outlined"
+                        required={field.required}
+                        value={value || ''}
+                        onChange={(e) => onFieldChange(e.target.value)}
+                        placeholder={buildPlaceholder()}
+                        type={field.type}
+                        error={showError && isRequired}
+                    />
                 );
             case 'select':
                 return (
-                    <FormControl fullWidth variant="outlined" required={field.required}>
-                        <Select value={value || ''} onChange={(e) => onFieldChange(e.target.value)} style={fieldStyle}>
-                        {field.options.map((option: string | number, index: number) => (
-                            <MenuItem key={index} value={option as string}>
-                            {option}
-                            </MenuItem>
-                        ))}
-                        </Select>
-                    </FormControl>
+                    <Select value={value || ''} id={field.id} onChange={(e) => onFieldChange(e.target.value)} style={fieldStyle}>
+                    {field.options.map((option: string | number, index: number) => (
+                        <MenuItem key={index} value={option as string}>
+                        {option}
+                        </MenuItem>
+                    ))}
+                    </Select>
                 );
             case 'textarea':
                 return (
-                    <FormControl fullWidth variant="outlined" required={field.required}  style={fieldStyle}>
-                        <TextareaAutosize
-                            minRows={3}
-                            maxRows={10}
-                            placeholder={buildPlaceholder()}
-                            style={{ width: '100%', resize: 'vertical' }}
-                            value={value || ''}
-                            onChange={(e) => onFieldChange(e.target.value)}
-                        />
-                    </FormControl>
+                    <TextareaAutosize
+                        id={field.id}
+                        minRows={3}
+                        maxRows={10}
+                        placeholder={buildPlaceholder()}
+                        style={{ width: '100%', resize: 'vertical' }}
+                        value={value || ''}
+                        onChange={(e) => onFieldChange(e.target.value)}
+                    />
                 );
             default:
                 return null;
@@ -77,10 +72,10 @@ const FormField = ({ field, value, onFieldChange, showError }: { field: any, val
     };
 
     return (
-        <div>
+        <FormControl fullWidth variant="outlined" required={field.required} style={fieldStyle}>
             <Typography variant="h6">{buildLabel()}</Typography>
             {renderInput()}
-        </div>
+        </FormControl>
     );
 };
 
