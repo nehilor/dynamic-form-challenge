@@ -18,14 +18,26 @@ const formSlice = createSlice({
       state,
       action: PayloadAction<{ id: string; value: any }>
     ) => {
-      state.formData[action.payload.id] = action.payload.value;
+      return {
+        ...state,
+        formData: {
+          ...state.formData,
+          [action.payload.id]: action.payload.value,
+        },
+      };
     },
     resetForm: (state) => {
-      state.formSent = false;
-      state.formData = {};
+      return {
+        ...state,
+        formSent: false,
+        formData: {},
+      };
     },
     submittedForm: (state) => {
-      state.formSent = true;
+      return {
+        ...state,
+        formSent: true,
+      };
     },
   },
 });

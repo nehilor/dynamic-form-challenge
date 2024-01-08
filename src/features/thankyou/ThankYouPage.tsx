@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetForm, submittedForm } from '../form/formSlice';
+import { resetForm } from '../form/formSlice';
 import { RootState } from '../../app/store';
 
 const ThankYouPage: React.FC = () => {
